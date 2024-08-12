@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import { ChatInterface} from './llm.mjs';
+import { ChatInterface } from './llm.js';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 
@@ -82,7 +82,10 @@ const StartService = async (port = null) => {
         port = process.env.PORT || 3000;
     }
     await app.ready()
-    app.listen(port, (err, address) => {
+    app.listen({
+      host: '0.0.0.0',
+      port,
+    }, (err, address) => {
         if (err) {
             console.error(err);
             process.exit(1);

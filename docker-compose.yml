@@ -1,0 +1,18 @@
+version: '3'
+
+# create decoder container with build
+services:
+  captcha-decoder:
+    image: mmhk/captcha-decoder
+    environment:
+      - TZ=ASIA/Hong_Kong
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_API_INSTANCE_NAME=${AZURE_OPENAI_API_INSTANCE_NAME}
+      - AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}
+    restart: always
+    ports:
+      - "3001:3000"
+#    command: ["node", "./index.js"]

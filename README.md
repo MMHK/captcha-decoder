@@ -1,5 +1,8 @@
 # Captcha Decoder
 
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mmhk/captcha-decoder)](https://hub.docker.com/r/mmhk/captcha-decoder)
+
 Captcha Decoder 是一个基于 OpenAI 和 Azure OpenAI 的验证码识别服务。
 
 ## 功能
@@ -27,5 +30,24 @@ Captcha Decoder 是一个基于 OpenAI 和 Azure OpenAI 的验证码识别服务
 ### 服务器配置
 
 - `PORT`: 服务器监听的端口号，默认为 3000。
+
+#### docker-compose
+
+```yaml
+services:
+  captcha-decoder:
+    image: mmhk/captcha-decoder:latest
+    environment:
+      - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+      - AZURE_OPENAI_API_KEY=YOUR_AZURE_OPENAI_API_KEY
+      - AZURE_OPENAI_DEPLOYMENT_NAME=YOUR_AZURE_OPENAI_DEPLOYMENT_NAME
+      - AZURE_OPENAI_API_INSTANCE_NAME=YOUR_AZURE_OPENAI_API_INSTANCE_NAME
+      - AZURE_OPENAI_API_VERSION=YOUR_AZURE_OPENAI_API_VERSION
+      - PORT=3000
+    ports:
+      - 3000:3000
+```
+
+
 
 

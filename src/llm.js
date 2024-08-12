@@ -26,7 +26,7 @@ class ChatInterface {
             }));
 
             const sysMessage = new SystemMessage({
-                content: 'You are a CAPTCHA decoder. Please output the result in JSON format.',
+                content: 'You are a CAPTCHA decoder. Please output the result in JSON format. ', // 可能存在干扰线，请精良排除后猜测
             });
             const message = new HumanMessage({
                 content: [

@@ -1,35 +1,28 @@
-FROM node:alpine as builder
-
-WORKDIR /home/captcha-decoder
-
-COPY . .
-
-RUN yarn global add @vercel/ncc \
-    && yarn install \
-    && yarn build
-
-FROM node:alpine as runner
+FROM node:18-alpine as runner
 
 WORKDIR /home/captcha-decoder
 
 ENV NODE_ENV production
 
-COPY --from=builder /home/captcha-decoder/dist /home/captcha-decoder/dist
+COPY . .
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs \
-  && chown nextjs:nodejs /home/captcha-decoder
-
+  && yarn set version stable \
+  && chown nextjs:nodejs -Rf /home/captcha-decoder
 
 USER nextjs
+
+RUN yarn install
 
 EXPOSE 3000
 
 ENV PORT=3000 \
+NODE_ENV=production \
 OPENAI_API_KEY= \
 AZURE_OPENAI_API_KEY= \
 AZURE_OPENAI_API_INSTANCE_NAME= \
 AZURE_OPENAI_DEPLOYMENT_NAME= \
 AZURE_OPENAI_API_VERSION=
 
-CMD node ./dist/index.js
+CMD yarn start

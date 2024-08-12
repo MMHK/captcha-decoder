@@ -13,3 +13,5 @@
 /.env
 /.idea
 /.yarn/cache
+/node_modules/.cache/esm
+/.yarn/releases
